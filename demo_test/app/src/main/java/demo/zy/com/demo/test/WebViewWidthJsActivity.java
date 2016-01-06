@@ -219,17 +219,18 @@ public class WebViewWidthJsActivity extends BaseTitleActivity {
 
                 int minY = -(getScollRange());
                 int maxY = 0;
-                mScroller.fling(0, baseTranslationY, 0, velocityY, 0, 0, minY, maxY);
+//                mScroller.fling(0, baseTranslationY, 0, velocityY, 0, 0, minY, maxY);
                 if (bottom_content > 0){
                     int contenth = (int) (getContentHeight() * UiProxy.bottom_content_ratio);
                     int range = contenth - bottom_h;
-                    if (-mScroller.getFinalY() <= (range) / 2f ){
-                        startAnimation(mScroller.getStartY(), -range);
-                        mScroller.forceFinished(true);
+                    float finalY = ViewHelper.getTranslationY(touchFrameLayout);
+                    if (Math.abs(finalY) <= (getScollRange()) / 2f ){
+                        startAnimation(baseTranslationY, -range);
+//                        mScroller.forceFinished(true);
                         return;
-                    }else if (-mScroller.getFinalY() > range / 2f ){
-                        startAnimation(mScroller.getStartY(), 0);
-                        mScroller.forceFinished(true);
+                    }else if (Math.abs(finalY) > getScollRange() / 2f ){
+                        startAnimation(baseTranslationY, 0);
+//                        mScroller.forceFinished(true);
                         return;
                     }
                 }

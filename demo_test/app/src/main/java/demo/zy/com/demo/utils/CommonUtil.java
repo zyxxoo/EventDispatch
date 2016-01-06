@@ -28,7 +28,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import demo.zy.com.demo.MyApplication;
+import demo.zy.com.demo.test.MyApplication;
 
 
 /**
