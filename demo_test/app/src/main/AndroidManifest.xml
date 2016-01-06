@@ -18,6 +18,7 @@
         <activity android:name=".test.RecycleViewCardViewActivity"/>
         <activity android:name=".test.SpecialCharactersActivity"/>
         <activity android:name=".test.MulRultViewActivity"/>
+        <activity android:name=".test.TriLeftOneRightActivity"/>
     </application>
 
 </manifest>

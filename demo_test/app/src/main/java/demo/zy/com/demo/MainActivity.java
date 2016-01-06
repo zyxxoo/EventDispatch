@@ -18,6 +18,7 @@ import java.util.List;
 import demo.zy.com.demo.test.MulRultViewActivity;
 import demo.zy.com.demo.test.RecycleViewCardViewActivity;
 import demo.zy.com.demo.test.SpecialCharactersActivity;
+import demo.zy.com.demo.test.TriLeftOneRightActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             uis.add(RecycleViewCardViewActivity.class);
             uis.add(SpecialCharactersActivity.class);
             uis.add(MulRultViewActivity.class);
+            uis.add(TriLeftOneRightActivity.class);
             names = new LinkedList<>();
         }
 

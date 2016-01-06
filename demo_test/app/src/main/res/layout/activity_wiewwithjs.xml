@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.github.ksoichiro.android.observablescrollview.ObservableWebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/dot_red_iv"
+            android:layout_gravity="center"
+            android:src="@drawable/dot_red"
+            android:layout_width="10dp"
+            android:layout_height="10dp" />
+    </FrameLayout>
+
+
+    <com.github.ksoichiro.android.observablescrollview.TouchInterceptionFrameLayout
+        android:id="@+id/bottom_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/bottom_linear"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_height" />
+        </LinearLayout>
+    </com.github.ksoichiro.android.observablescrollview.TouchInterceptionFrameLayout>
+</FrameLayout>

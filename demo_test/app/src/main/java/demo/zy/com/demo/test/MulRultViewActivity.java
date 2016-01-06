@@ -1,5 +1,6 @@
 package demo.zy.com.demo.test;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,13 +15,20 @@ import demo.zy.com.demo.view.MulRuleView;
  */
 public class MulRultViewActivity extends BaseTitleActivity{
     MulRuleView mulRuleView;
+    int[] color = {Color.RED, Color.YELLOW, Color.BLUE, Color.CYAN, Color.GREEN, Color.DKGRAY};
+    int i = 0;
     @Override
     protected void initData() {
          mulRuleView = (MulRuleView) findViewById(R.id.mulruleView);
         ImageView imageView = new ImageView(MulRultViewActivity.this);
         imageView.setImageResource(R.mipmap.ic_launcher);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setBackgroundColor(getColor());
          mulRuleView.addView(imageView);
+    }
+
+    private int getColor() {
+        return color[(i++) % color.length];
     }
 
     @Override
@@ -31,6 +39,7 @@ public class MulRultViewActivity extends BaseTitleActivity{
             public void onClick(View v) {
 
                 ImageView imageView = new ImageView(MulRultViewActivity.this);
+                imageView.setBackgroundColor(getColor());
                 imageView.setImageResource(R.mipmap.ic_launcher);
                 if (mulRuleView.getChildCount() < 6){
                     mulRuleView.addView(imageView);
