@@ -109,6 +109,7 @@ public class WebViewWidthJsActivity extends BaseTitleActivity {
         return findViewById(R.id.root).getHeight();
     }
 
+
     public class UiProxy implements ValueAnimator.AnimatorUpdateListener {
         private static final float MAX_TEXT_SCALE_DELTA = 0.3f;
         private static final int INVALID_POINTER = -1;
