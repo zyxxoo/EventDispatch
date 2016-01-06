@@ -19,6 +19,7 @@ import demo.zy.com.demo.test.MulRultViewActivity;
 import demo.zy.com.demo.test.RecycleViewCardViewActivity;
 import demo.zy.com.demo.test.SpecialCharactersActivity;
 import demo.zy.com.demo.test.TriLeftOneRightActivity;
+import demo.zy.com.demo.test.WebViewWidthJsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             uis.add(SpecialCharactersActivity.class);
             uis.add(MulRultViewActivity.class);
             uis.add(TriLeftOneRightActivity.class);
+            uis.add(WebViewWidthJsActivity.class);
             names = new LinkedList<>();
         }
 

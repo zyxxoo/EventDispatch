@@ -19,6 +19,7 @@
         <activity android:name=".test.SpecialCharactersActivity"/>
         <activity android:name=".test.MulRultViewActivity"/>
         <activity android:name=".test.TriLeftOneRightActivity"/>
+        <activity android:name=".test.WebViewWidthJsActivity"/>
     </application>
 
 </manifest>
