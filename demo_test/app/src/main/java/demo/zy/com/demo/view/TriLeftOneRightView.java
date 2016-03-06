@@ -60,9 +60,11 @@ public class TriLeftOneRightView extends ViewGroup{
             int heightspec = MeasureSpec.makeMeasureSpec(ch, MeasureSpec.EXACTLY);
             measureChild(child, widthspec, heightspec);
         }
-
-        int mode = MeasureSpec.getMode(heightMeasureSpec);
         int size1 = MeasureSpec.getSize(resolveSize(height, heightMeasureSpec));
+        if (size > 3){
+            size1 = width;
+        }
+        int mode = MeasureSpec.getMode(heightMeasureSpec);
         setMeasuredDimension(width, size1);
     }
 
@@ -108,7 +110,7 @@ public class TriLeftOneRightView extends ViewGroup{
         public  float ratio = 2f/3f; //左右比例
         public  int hspace = 20; //水平线的高度
         public  int vspace = 20; //垂直线的宽度
-        public final int maxCount = 3;
+        public final int maxCount = 6;
 
         public Config(Context context){
             screenWidth = context.getResources().getDisplayMetrics().widthPixels;
@@ -122,10 +124,12 @@ public class TriLeftOneRightView extends ViewGroup{
                     break;
                 case 2:
                 case 3:
+                case 4:
+                case 5:
+                case 6:
                     ret = (int) (width * (1 - ratio) - vspace / 2f);
                     break;
             }
-
             return ret;
         }
 
@@ -133,11 +137,13 @@ public class TriLeftOneRightView extends ViewGroup{
             int ret = 0;
             switch (i){
                 case 1:
-
                     ret = (int) (width * ratio - vspace / 2f);
                     break;
                 case 2:
                 case 3:
+                case 4:
+                case 5:
+                case 6:
                     ret = (int) ((width * ratio - vspace / 2f) / 2f - hspace / 2f);
                     break;
             }
@@ -146,22 +152,26 @@ public class TriLeftOneRightView extends ViewGroup{
 
         public Point getPoint(int width, int height, int i) {
             Point point = null;
-
             switch (i){
                 case 1:
-
                     point = new Point(0, 0);
                     break;
                 case 2:
-
                     point = new Point(getWith(width, 1) + vspace, 0);
                     break;
                 case 3:
-
                     point = new Point(getWith(width, 1) + vspace, getHeight(width, 2) + hspace);
                     break;
+                case 4:
+                    point = new Point(0, getHeight(width, 1) + hspace);
+                    break;
+                case 5:
+                    point = new Point(getWith(width, 4) + vspace, getHeight(width, 1) + hspace);
+                    break;
+                case 6:
+                    point = new Point(2*(getWith(width, 4) + vspace), getHeight(width, 1) + hspace);
+                    break;
             }
-
             return point;
         }
     }

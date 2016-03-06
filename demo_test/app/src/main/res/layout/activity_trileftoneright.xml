@@ -28,5 +28,25 @@
             android:src="@mipmap/ic_launcher"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+        <ImageView
+            android:background="#ff0000"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerInside"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:background="#00ff00"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:background="#0000ff"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </demo.zy.com.demo.view.TriLeftOneRightView>
 </LinearLayout>

@@ -394,6 +394,7 @@ public class WebViewWidthJsActivity extends BaseTitleActivity {
         public void hiddenBar(){
             uiProxy.hiddenBar();
         };
+
     }
     public interface UrlOpt{
         public  String getUrl();

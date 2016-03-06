@@ -8,6 +8,9 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import demo.zy.com.demo.R;
 import demo.zy.com.demo.view.TitleView;
 
@@ -61,5 +64,15 @@ public abstract class BaseTitleActivity extends  BaseActivity{
     protected View getContentView(int resId){
 
         return LayoutInflater.from(this).inflate(resId, content, false);
+    }
+
+    String[] data = {"activity", "server", "ipohoe", "android", "google",
+    "baidu", "alipay", "honghaier", "sunwukong"};
+    public List<String> getTotal(){
+        List<String> ret = new LinkedList<>();
+        for (int i = 0; i < 100; i++){
+            ret.add(data[i%data.length]);
+        }
+        return ret;
     }
 }
