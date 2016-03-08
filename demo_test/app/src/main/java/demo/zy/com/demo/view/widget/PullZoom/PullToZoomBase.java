@@ -28,6 +28,7 @@ import demo.zy.com.demo.R;
  * 时间:2016/2/3.
  */
 public abstract class PullToZoomBase<T extends View> extends com.github.ksoichiro.android.observablescrollview.TouchInterceptionFrameLayout implements IPullToZoom<T>, TouchInterceptionFrameLayout.TouchInterceptionListener {
+    public static final String TAG = "PullToZoomBase";
     private static final float FRICTION = 2.0f;
     private static final float MAX_TEXT_SCALE_DELTA = 0.3f;
     private static final int INVALID_POINTER = -1;
@@ -101,24 +102,15 @@ public abstract class PullToZoomBase<T extends View> extends com.github.ksoichir
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-//        int width = MeasureSpec.getSize(widthMeasureSpec);
-//        if (zoomView != null && ){
-//            int zoomheight = (int) this.zoomViewHeight;
-//            int zoomWidth = width;
-//            ViewGroup.LayoutParams params = zoomView.getLayoutParams();
-//            if (params.height > 0){
-//                zoomheight = params.height;
-//            }
-//            if (params.width > 0){
-//                zoomWidth = params.width;
-//            }
-//
-//            if (zoomheight < rootViewTop) zoomheight = (int) rootViewTop;
-//            zoomView.measure(MeasureSpec.makeMeasureSpec(zoomWidth, MeasureSpec.EXACTLY),
-//                    MeasureSpec.makeMeasureSpec(zoomheight, MeasureSpec.EXACTLY));
-//        }
-
         Log.d("---->", "onMeasure, rootViewTop=" + rootViewTop);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_MOVE) {
+            Log.d(TAG, "touch" + ev.getY());
+        }
+        return super.onTouchEvent(ev);
     }
 
     @Override
@@ -164,13 +156,15 @@ public abstract class PullToZoomBase<T extends View> extends com.github.ksoichir
         if (zoomView == null) return;
 //        float translationY = ScrollUtils.getFloat(ViewHelper.getTranslationY(rootView) + diffY, -flexibleSpace, 0);
         if (Math.abs(diffY) > 1 && Math.abs(diffY) >= mSlop) {
-            float translationY = mBaseTranslationY + diffY / factor;
-            MotionEvent e = MotionEvent.obtainNoHistory(ev);
-            e.offsetLocation(0, translationY - mBaseTranslationY);
-            mVelocityTracker.addMovement(e);
+            float translationY = mBaseTranslationY;
+            translationY += diffY;
+//            MotionEvent e = MotionEvent.obtainNoHistory(ev);
+//            e.offsetLocation(0, translationY - mBaseTranslationY);
+            mVelocityTracker.addMovement(ev);
 //            if (canPull(translationY)) {
 //                pullEvent(translationY);
 //            }
+            Log.d(TAG, translationY+" diffy=" + diffY);
             if (isReadyForPullStart(diffX, diffY)){
                 if (canPull(translationY)) {
                     pullEvent(translationY);
@@ -238,9 +232,7 @@ public abstract class PullToZoomBase<T extends View> extends com.github.ksoichir
 
     protected abstract void pullEvent(float translationY);
 
-    public abstract void setHeaderView(View headerView);
-
-    public abstract void setZoomView(View zoomView);
+    public void setZoomView(View zoomView){this.zoomView = zoomView; requestLayout();};
 
     protected abstract T createRootView(Context context, AttributeSet attrs);
 

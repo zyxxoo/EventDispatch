@@ -13,6 +13,7 @@ import android.view.View;
  * 时间:2016/1/9.
  */
 public class EventViewTest extends View{
+    public static String TAG = "+========>eventViewTest";
     public EventViewTest(Context context) {
         super(context);
     }
@@ -43,6 +44,22 @@ public class EventViewTest extends View{
         MotionEvent o = MotionEvent.obtainNoHistory(event);
         o.setLocation(10, 10);
         logEvent("setLocation", o);
+
+        Log.d(TAG, "y="+event.getY());
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                Log.d(TAG, "touch_down");
+                break;
+            case MotionEvent.ACTION_MOVE:
+                Log.d(TAG, "touch_move");
+                return false;
+            case MotionEvent.ACTION_CANCEL:
+                Log.d(TAG, "touch_cancel");
+                break;
+            case MotionEvent.ACTION_UP:
+                Log.d(TAG, "touch_up");
+                break;
+        }
         return true;
     }
 

@@ -3,6 +3,7 @@ package demo.zy.com.demo.view.widget.PullZoom;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.text.method.KeyListener;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -69,13 +70,15 @@ public class PullToZoomListView extends PullToZoomBase<ListView>{
     @Override
     protected void pullEvent(float translationY) {
         if (translationY > 0) {
-            ViewHelper.setTranslationY(rootView, translationY);
-            if (zoomViewRect.bottom - (rootViewRect.top + translationY) <= 0.5) {
+            ViewHelper.setTranslationY(rootView, translationY / 2.0f);
+            if (zoomViewRect.bottom - (rootViewRect.top + translationY / 2.0f) <= 0.5) {
                 toZoom(Math.max(translationY, 0));
             }
         }else{
             ViewHelper.setTranslationY(rootView, translationY);
-            ViewHelper.setTranslationY(zoomView, translationY / 2.0f);
+            float zoomTranslationY = translationY;
+            ViewHelper.setTranslationY(zoomView, zoomTranslationY / 2.0f);
+
         }
     }
 
@@ -86,10 +89,6 @@ public class PullToZoomListView extends PullToZoomBase<ListView>{
         zoomView.setLayoutParams(layoutParams);
     }
 
-    @Override
-    public void setHeaderView(View headerView) {
-
-    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -121,7 +120,13 @@ public class PullToZoomListView extends PullToZoomBase<ListView>{
             mScroller.startScroll(0, (int) ViewHelper.getTranslationY(rootView), 0, -Math.round(ViewHelper.getTranslationY(rootView)), 200);
             return true;
         }else{
-            return false;
+
+            if (velocityY > 0) {
+                mScroller.fling(0, Math.round(ViewHelper.getTranslationY(rootView)), 0, velocityY, 0, 0, Math.round(ViewHelper.getTranslationY(rootView)), 0);
+            }else{
+                mScroller.fling(0, Math.round(ViewHelper.getTranslationY(rootView)), 0, velocityY, 0, 0, Math.round(-zoomViewRect.height()), Math.round(ViewHelper.getTranslationY(rootView)));
+            }
+            return true;
         }
     }
 
@@ -139,16 +144,7 @@ public class PullToZoomListView extends PullToZoomBase<ListView>{
 //                ret = isLastVisible();
             } else if (diffY > 0) {//向下
                 ret = isFirstVisible();
-
-//                if (baseTranslationY >= 0) {
-//                    ret = isFirstVisible();
-//                }else{
-//                    ret = true;
-//                }
             }
-
-        Log.d("---->", "isReadyForPullStart, diffx=" + diffX + " ,diffy=" + diffY
-                + " , baseTranslationY=" + baseTranslationY + " ,ret=" + ret);
         return ret;
     }
 

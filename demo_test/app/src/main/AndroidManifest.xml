@@ -37,6 +37,7 @@
         <activity android:name=".test.ListActivity"/>
         <activity android:name=".test.listview.ListActivity"/>
         <activity android:name=".test.listview.OtherActivity"/>
+        <activity android:name=".test.PullZoomScrollView"/>
     </application>
 
 </manifest>

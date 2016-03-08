@@ -21,6 +21,7 @@ import demo.zy.com.demo.test.ListActivity;
 import demo.zy.com.demo.test.MulRultViewActivity;
 import demo.zy.com.demo.test.MyViewDragHelperActivity;
 import demo.zy.com.demo.test.PullZoomListViewActivity;
+import demo.zy.com.demo.test.PullZoomScrollView;
 import demo.zy.com.demo.test.RecycleViewCardViewActivity;
 import demo.zy.com.demo.test.SpecialCharactersActivity;
 import demo.zy.com.demo.test.TriLeftOneRightActivity;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             uis.add(EventTestActivity.class);
             uis.add(MyViewDragHelperActivity.class);
             uis.add(PullZoomListViewActivity.class);
+            uis.add(PullZoomScrollView.class);
             uis.add(demo.zy.com.demo.test.pull.MainActivity.class);
             uis.add(ListActivity.class);
             uis.add(demo.zy.com.demo.test.listview.ListActivity.class);
