@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -84,6 +85,8 @@ public abstract class LinkageBaseFrameLayout extends FrameLayout {
                         // 1. 给前面分发给子 View 的事件创建 cancel 事件，使事件完整
                         if (!cancelChildEvent && dispatchChildDownEvent){ // 上一个事件是给子 View 处理，并且没有传递结束事件
                             MotionEvent cancelEvent = obtainMotionEvent(ev, MotionEvent.ACTION_CANCEL);
+                            Log.d("isReadyPull___", "eventMove");
+                            Log.d("isReadyPull___", "eventCancel");
                             dispathEvent(ev);
                             dispathEvent(cancelEvent);
                             cancelChildEvent = true;
@@ -122,9 +125,11 @@ public abstract class LinkageBaseFrameLayout extends FrameLayout {
                         if (!dispatchChildDownEvent){//没有分发 down 事件
                             dispatchChildDownEvent = true;
                             MotionEvent downEvent = obtainMotionEvent(ev, MotionEvent.ACTION_DOWN);
+                            Log.d("isReadyPull___", "eventDown");
+
                             dispathEvent(downEvent);
                         }else {
-
+                            Log.d("isReadyPull___", "eventmove");
                             dispathEvent(ev);
                         }
 
@@ -134,6 +139,7 @@ public abstract class LinkageBaseFrameLayout extends FrameLayout {
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                      if (!cancelChildEvent && dispatchChildDownEvent){
+                         Log.d("isReadyPull___", "eventUp");
                          dispathEvent(ev);
                          cancelChildEvent = true;
                      }

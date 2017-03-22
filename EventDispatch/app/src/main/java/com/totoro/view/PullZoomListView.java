@@ -31,7 +31,7 @@ public class PullZoomListView extends PullZoomBase<ListView, ImageView> {
         int y = (int) ViewHelper.getTranslationY(mainView);
         // 1. mainView 在顶部，diffy > 0, mainView 第一行数据已经显示
         // 2. mainView 不在顶部
-        boolean ret = (y <= -originMainRect.top && diffy > 0 && mainView.getScrollY() == 0) || isFirstShow();
+        boolean ret = ((y <= -originMainRect.top && diffy > 0 && isFirstShow()) || y > -originMainRect.top);
         Log.d("isReadyPull", "diffy="+diffy+", ret="+ret);
         return ret;
     }

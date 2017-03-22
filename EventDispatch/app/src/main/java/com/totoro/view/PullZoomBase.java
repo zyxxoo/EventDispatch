@@ -109,14 +109,12 @@ public abstract class PullZoomBase<MAINVIEW extends View, SCALEVIEW extends View
 
         velocityTracker.addMovement(event);
 
-//        if (Math.abs(diffy) > viewConfiguration.getScaledTouchSlop()) { ／／加了这个滑动不流畅
-            smoothLayout((int) (mainBaseTranslationY + diffy));
-//        }
+        smoothLayout((int) (mainBaseTranslationY + diffy));
     }
 
     @Override
     public void eventCancelOrUp(MotionEvent event) {
-        Log.d("isReadyPull", "eventDown");
+        Log.d("isReadyPull", "eventCancel");
         velocityTracker.addMovement(event);
         mScroller.forceFinished(true);
         velocityTracker.computeCurrentVelocity(1000, viewConfiguration.getScaledMaximumFlingVelocity());

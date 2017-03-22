@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/default_pullzoom_top"
             android:background="#003300"
             android:layout_width="match_parent"
-            android:layout_height="2000dp"/>
+            android:layout_height="1000dp"/>
 
     </com.totoro.view.PullZoomListView>
 
