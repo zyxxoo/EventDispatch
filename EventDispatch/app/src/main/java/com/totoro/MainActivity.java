@@ -30,11 +30,6 @@ public class MainActivity extends AppCompatActivity {
                 uiActivity.openUI(MainActivity.this, position);
             }
         });
-
-
-        B b = new B();
-        A a = b;
-        Log.d("---->b instanceof c", (a instanceof C) + "");
     }
 
 

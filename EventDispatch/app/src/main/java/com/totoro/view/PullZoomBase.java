@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -85,6 +86,8 @@ public abstract class PullZoomBase<MAINVIEW extends View, SCALEVIEW extends View
     int actionPointId = -1;
     @Override
     public void eventDown(MotionEvent event) {
+        Log.d("isReadyPull", "eventDown");
+
         mScroller.abortAnimation();
         mScroller.forceFinished(true);
         if (velocityTracker == null){
@@ -97,19 +100,23 @@ public abstract class PullZoomBase<MAINVIEW extends View, SCALEVIEW extends View
         velocityTracker.addMovement(event);
 
         mainBaseTranslationY = mainView.getTranslationY();
+
     }
 
     @Override
     public void eventMove(MotionEvent event, float diffx, float diffy) {
+        Log.d("isReadyPull", "eventMove");
+
         velocityTracker.addMovement(event);
 
-        if (Math.abs(diffy) > viewConfiguration.getScaledTouchSlop()) {
+//        if (Math.abs(diffy) > viewConfiguration.getScaledTouchSlop()) { ／／加了这个滑动不流畅
             smoothLayout((int) (mainBaseTranslationY + diffy));
-        }
+//        }
     }
 
     @Override
     public void eventCancelOrUp(MotionEvent event) {
+        Log.d("isReadyPull", "eventDown");
         velocityTracker.addMovement(event);
         mScroller.forceFinished(true);
         velocityTracker.computeCurrentVelocity(1000, viewConfiguration.getScaledMaximumFlingVelocity());
