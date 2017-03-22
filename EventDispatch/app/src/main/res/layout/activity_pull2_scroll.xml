@@ -19,15 +19,19 @@
             android:background="#003300"
             android:layout_width="match_parent"
             android:layout_height="1000dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <TextView
                 android:layout_marginTop="50dp"
                 android:textSize="14sp"
-                android:gravity="center"
+                android:gravity="center|top"
                 android:text="scrollview"
                 android:textColor="#999999"
                 android:layout_width="match_parent"
                 android:layout_height="2000dp" />
-
+            </LinearLayout>
         </ScrollView>>
     </com.totoro.view.PullZoomScrollView>
 </LinearLayout>

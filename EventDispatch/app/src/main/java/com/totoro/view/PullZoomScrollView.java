@@ -28,11 +28,11 @@ public class PullZoomScrollView extends PullZoomBase<ScrollView, ImageView> {
     @Override
     protected boolean isReadyPull(float diffx, float diffy) {
 
-        int y = (int) ViewHelper.getTranslationY(mainView);
+        float y =  ViewHelper.getTranslationY(mainView);
         // 1. mainView 在顶部，diffy > 0, mainView 第一行数据已经显示
         // 2. mainView 不在顶部
         boolean ret = (y <= -originMainRect.top && diffy > 0 && mainView.getScrollY() <= 0) || y > -originMainRect.top;
-        Log.d("isReadyPull", "diffy="+diffy+", ret="+ret);
+        Log.d("isReadyPull", "diffy="+diffy+", scrollY="+mainView.getScrollY()+", y="+y+", ret="+ret);
         return ret;
     }
 
@@ -50,8 +50,7 @@ public class PullZoomScrollView extends PullZoomBase<ScrollView, ImageView> {
             // 除 2 是为了让下拉的时候有阻碍的感觉，用户可以将 2 换成关于 futureTranslationY 的函数来改进这个效果
             acceptTranslationY = futureTranslationY / 2;
             ViewHelper.setTranslationY(scaleview, 0);
-            int height = scaleview.getLayoutParams().height;
-            scaleHeight(originScaleRect.height() + futureTranslationY);
+            scaleHeight(originScaleRect.height() + acceptTranslationY);
         }
 
         ViewHelper.setTranslationY(mainView, acceptTranslationY);

@@ -29,8 +29,11 @@ public abstract class LinkageBaseFrameLayout extends FrameLayout {
 
     boolean intercepting;
     PointF firstPoint;
+
+
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+
         if (getLinkageListener() != null){
             switch (ev.getActionMasked()){
                 case MotionEvent.ACTION_DOWN://如果拦截，那么后续事件不会传递给 子view，并且不会子啊调用这个方法
@@ -85,8 +88,6 @@ public abstract class LinkageBaseFrameLayout extends FrameLayout {
                         // 1. 给前面分发给子 View 的事件创建 cancel 事件，使事件完整
                         if (!cancelChildEvent && dispatchChildDownEvent){ // 上一个事件是给子 View 处理，并且没有传递结束事件
                             MotionEvent cancelEvent = obtainMotionEvent(ev, MotionEvent.ACTION_CANCEL);
-                            Log.d("isReadyPull___", "eventMove");
-                            Log.d("isReadyPull___", "eventCancel");
                             dispathEvent(ev);
                             dispathEvent(cancelEvent);
                             cancelChildEvent = true;
@@ -125,11 +126,9 @@ public abstract class LinkageBaseFrameLayout extends FrameLayout {
                         if (!dispatchChildDownEvent){//没有分发 down 事件
                             dispatchChildDownEvent = true;
                             MotionEvent downEvent = obtainMotionEvent(ev, MotionEvent.ACTION_DOWN);
-                            Log.d("isReadyPull___", "eventDown");
 
                             dispathEvent(downEvent);
                         }else {
-                            Log.d("isReadyPull___", "eventmove");
                             dispathEvent(ev);
                         }
 
@@ -139,7 +138,6 @@ public abstract class LinkageBaseFrameLayout extends FrameLayout {
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                      if (!cancelChildEvent && dispatchChildDownEvent){
-                         Log.d("isReadyPull___", "eventUp");
                          dispathEvent(ev);
                          cancelChildEvent = true;
                      }
@@ -161,7 +159,8 @@ public abstract class LinkageBaseFrameLayout extends FrameLayout {
     }
 
     private MotionEvent obtainMotionEvent(MotionEvent ev, int action) {
-        MotionEvent downEvent = MotionEvent.obtain(ev);
+        MotionEvent downEvent = MotionEvent.obtainNoHistory(ev);
+        downEvent.setLocation(ev.getX(), ev.getY());
         downEvent.setAction(action);
         return downEvent;
     }
@@ -181,7 +180,7 @@ public abstract class LinkageBaseFrameLayout extends FrameLayout {
             child = getChildAt(i);
             child.getHitRect(hintRect);
             if (hintRect.contains((int)event.getX(), (int)event.getY())){ // 判断点击点的坐标是否在该 view 上
-                temp = MotionEvent.obtain(event);
+                temp = MotionEvent.obtainNoHistory(event);
                 temp.offsetLocation(-hintRect.left, -hintRect.top); // event 坐标修改为相对 子 view
                 consume |= child.dispatchTouchEvent(temp); //分发事件
                 if (consume) break;

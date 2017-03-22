@@ -28,7 +28,7 @@ public class PullZoomListView extends PullZoomBase<ListView, ImageView> {
     @Override
     protected boolean isReadyPull(float diffx, float diffy) {
 
-        int y = (int) ViewHelper.getTranslationY(mainView);
+        float y = ViewHelper.getTranslationY(mainView);
         // 1. mainView 在顶部，diffy > 0, mainView 第一行数据已经显示
         // 2. mainView 不在顶部
         boolean ret = ((y <= -originMainRect.top && diffy > 0 && isFirstShow()) || y > -originMainRect.top);
@@ -50,20 +50,22 @@ public class PullZoomListView extends PullZoomBase<ListView, ImageView> {
 
     @Override
     protected void smoothLayout(int futureTranslationY) {
+        int acceptTranslationY = futureTranslationY;
         if (futureTranslationY < 0){
 
-            ViewHelper.setTranslationY(scaleview, futureTranslationY / 2);
+            ViewHelper.setTranslationY(scaleview, acceptTranslationY / 2); //放大的view 的移动的比 mainView 慢 1／2
             scaleHeight(originScaleRect.height());
         }else if (futureTranslationY == 0){
             ViewHelper.setTranslationY(scaleview, 0);
             scaleHeight(originScaleRect.height());
         }else if (futureTranslationY > 0){
+            // 除 2 是为了让下拉的时候有阻碍的感觉，用户可以将 2 换成关于 futureTranslationY 的函数来改进这个效果
+            acceptTranslationY = futureTranslationY / 2;
             ViewHelper.setTranslationY(scaleview, 0);
-            int height = scaleview.getLayoutParams().height;
-            scaleHeight(originScaleRect.height() + futureTranslationY);
+            scaleHeight(originScaleRect.height() + acceptTranslationY);
         }
 
-        ViewHelper.setTranslationY(mainView, futureTranslationY);
+        ViewHelper.setTranslationY(mainView, acceptTranslationY);
     }
 
     private void scaleHeight(int height) {

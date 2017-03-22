@@ -86,8 +86,6 @@ public abstract class PullZoomBase<MAINVIEW extends View, SCALEVIEW extends View
     int actionPointId = -1;
     @Override
     public void eventDown(MotionEvent event) {
-        Log.d("isReadyPull", "eventDown");
-
         mScroller.abortAnimation();
         mScroller.forceFinished(true);
         if (velocityTracker == null){
@@ -105,8 +103,6 @@ public abstract class PullZoomBase<MAINVIEW extends View, SCALEVIEW extends View
 
     @Override
     public void eventMove(MotionEvent event, float diffx, float diffy) {
-        Log.d("isReadyPull", "eventMove");
-
         velocityTracker.addMovement(event);
 
         smoothLayout((int) (mainBaseTranslationY + diffy));
@@ -114,7 +110,6 @@ public abstract class PullZoomBase<MAINVIEW extends View, SCALEVIEW extends View
 
     @Override
     public void eventCancelOrUp(MotionEvent event) {
-        Log.d("isReadyPull", "eventCancel");
         velocityTracker.addMovement(event);
         mScroller.forceFinished(true);
         velocityTracker.computeCurrentVelocity(1000, viewConfiguration.getScaledMaximumFlingVelocity());
