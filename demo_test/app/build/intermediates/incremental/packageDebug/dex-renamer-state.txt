@@ -1,7 +1,0 @@
-#Tue Mar 21 18:40:11 CST 2017
-base.0=/Users/zhangyan/Documents/android/MyStudyDemo/demo_test/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_dd674afe7c8234f4eae61a8225665c511e642fdf
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=/Users/zhangyan/Documents/android/MyStudyDemo/demo_test/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_2c9a2502e754b448f3c7ec828bd5e502a259681c/classes.dex
-base.1=/Users/zhangyan/Documents/android/MyStudyDemo/demo_test/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_2c9a2502e754b448f3c7ec828bd5e502a259681c
-file.0=/Users/zhangyan/Documents/android/MyStudyDemo/demo_test/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_dd674afe7c8234f4eae61a8225665c511e642fdf/classes.dex
